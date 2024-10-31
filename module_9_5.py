@@ -14,11 +14,21 @@ class Iterator:
         return self
 
     def __next__(self):
-        self.pointer += self.step
+        a = self.pointer
         if self.step > 0:
             if self.pointer > self.stop:
                 raise StopIteration()
         if self.step < 0:
             if self.pointer < self.stop:
                 raise StopIteration()
-        return self.pointer
+        self.pointer += self.step
+        return a
+
+
+
+try:
+    iter1 = Iterator(5, 1, -1)
+    for i in iter1:
+        print(i, end=' ')
+except StepValueError:
+    print('Шаг указан неверно')
